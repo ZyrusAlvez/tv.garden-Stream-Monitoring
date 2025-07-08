@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright/python:focal
+FROM mcr.microsoft.com/playwright/python:v1.48.0-focal
 
 WORKDIR /app
 
