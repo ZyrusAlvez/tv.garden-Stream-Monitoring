@@ -12,7 +12,7 @@ def check_file(url):
         return False
 
 
-def tvgarden_scraper(url: str, see_name: bool = False) -> tuple[str, str | None]:
+def tvgarden_scraper(url: str, see_name: bool = False):
     with sync_playwright() as p:
         try:
             browser = p.chromium.launch(
@@ -45,7 +45,7 @@ def tvgarden_scraper(url: str, see_name: bool = False) -> tuple[str, str | None]
                 color = button.evaluate("element => getComputedStyle(element).color")
                 print(channel)
                 if video_url and color != "rgba(241, 241, 241, 1)":
-                    
+
                     print(f"📺 Channel: {channel}")
                     print(f"🔗 Video URL: {video_url}")
                     print("---")
