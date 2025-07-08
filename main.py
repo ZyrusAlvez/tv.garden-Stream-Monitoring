@@ -3,6 +3,13 @@ from datetime import datetime
 import pytz
 from tvgarden import tvgarden_scraper
 from config import supabase
+import subprocess
+import os
+
+if not os.path.exists("/root/.cache/ms-playwright"):
+    print("▶ Installing Playwright browsers...")
+    subprocess.run(["playwright", "install"], check=True)
+
 
 # Local timestamp
 def get_local_time():
