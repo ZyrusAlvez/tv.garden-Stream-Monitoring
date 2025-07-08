@@ -1,4 +1,4 @@
-selenium
+playwright
 requests
 pytz
 supabase
