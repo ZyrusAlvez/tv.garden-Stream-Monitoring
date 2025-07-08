@@ -25,9 +25,9 @@ def run_scraper(url_list):
             "url": url
         }).execute()
 
-if __name__ == "__main__":
-    urls = [
-        "https://tv.garden/us/hO3HYR4TgtSkMv",
-    ]
-    run_scraper(urls)
-    print("Scraping completed.")
+
+urls = [
+    "https://tv.garden/us/hO3HYR4TgtSkMv",
+]
+run_scraper(urls)
+print("Scraping completed.")

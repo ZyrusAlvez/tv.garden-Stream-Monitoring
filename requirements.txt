@@ -1,5 +1,5 @@
-selenium
+playwright
 requests
 pytz
-python-dotenv
 supabase
+python-dotenv
