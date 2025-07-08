@@ -1,4 +1,3 @@
-import time
 from datetime import datetime
 import pytz
 from tvgarden import tvgarden_scraper
@@ -26,8 +25,9 @@ def run_scraper(url_list):
         }).execute()
 
 
+
 urls = [
-    "https://tv.garden/us/hO3HYR4TgtSkMv",
+    "https://tv.garden/ph/k1le9DNzsDpeDQ",
 ]
 run_scraper(urls)
 print("Scraping completed.")

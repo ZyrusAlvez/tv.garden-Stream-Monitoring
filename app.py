@@ -21,7 +21,7 @@ def fetch_grouped_data():
 
     df["parsed_time"] = df["timestamp"].apply(parse_timestamp)
     df = df.sort_values(by="parsed_time", ascending=True)  # Earliest to latest
-
+    
     grouped = {}
     for url, group_df in df.groupby("url"):
         name = group_df["name"].iloc[0] if "name" in group_df.columns else "Unknown"

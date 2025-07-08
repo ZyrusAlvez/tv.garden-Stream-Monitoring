@@ -11,7 +11,6 @@ def check_file(url):
     except:
         return False
 
-
 def tvgarden_scraper(url: str, see_name: bool = False):
     with sync_playwright() as p:
         try:
@@ -28,44 +27,44 @@ def tvgarden_scraper(url: str, see_name: bool = False):
             context = browser.new_context()
             page = context.new_page()
             
-            print(f"📌{url}")
+            print(f"📌 {url}")
             name = None
             
             page.goto(url)
-            
-            # Wait for video-link elements to be present
             page.wait_for_selector(".video-link", timeout=20000)
-            time.sleep(5)
-            
-            buttons = page.locator(".video-link").all()
-            
-            for button in buttons:
-                video_url = button.get_attribute("data-video-url")
-                channel = button.get_attribute("data-channel-name")
-                color = button.evaluate("element => getComputedStyle(element).color")
-                print(channel)
-                if video_url and color != "rgba(241, 241, 241, 1)":
+            time.sleep(5)  # Let content fully render
 
-                    print(f"📺 Channel: {channel}")
-                    print(f"🔗 Video URL: {video_url}")
-                    print("---")
-                    
-                    if video_url.startswith("https://www.youtube-nocookie.com"):
+            buttons = page.locator(".video-link")
+            count = buttons.count()
+
+
+            for i in range(count):
+                button = buttons.nth(i)
+
+                span = button.locator("span.channel-name-container")
+                channel_name = span.text_content()
+                video_url = button.get_attribute("data-video-url")
+
+                color = button.evaluate("el => getComputedStyle(el).color")
+
+                if color == 'rgb(36, 36, 43)':
+
+                    if video_url and video_url.startswith("https://www.youtube-nocookie.com"):
+                        # logic for YouTube live check
                         status = is_video_live(video_url)
+                        print(status)
+                        return status, channel_name
                     else:
+                        # logic for normal file check
                         status = "UP" if check_file(video_url) else "DOWN"
-                    
-                    print(status)
-                    print("---")
-                    return status, name
-            
-            print("❌DOWN")
-            print("Error finding video source")
+                        print(status)
+                        return status, channel_name
+
             return "DOWN", name
-            
+
         except Exception as e:
             print("❌ Error:", e)
             return "ERROR", None
-            
+
         finally:
             browser.close()
