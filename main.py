@@ -27,7 +27,7 @@ def run_scraper(url_list):
 
 
 urls = [
-    "https://tv.garden/ph/k1le9DNzsDpeDQ",
+    "https://tv.garden/us/hO3HYR4TgtSkMv",
 ]
 run_scraper(urls)
 print("Scraping completed.")
