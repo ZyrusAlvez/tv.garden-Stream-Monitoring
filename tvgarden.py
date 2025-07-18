@@ -6,8 +6,13 @@ import time
 def check_file(url):
     print("Checking file:", url)
     try:
-        response = requests.head(url, timeout=5)
-        return response.status_code == 200 and 'application' in response.headers.get('Content-Type', '')
+        try:
+            response = requests.head(url, timeout=30)
+        except:
+            return "Timeout Error on the video source"
+        if 200 <= response.status_code < 400:
+            return True
+        return False
     except:
         return False
 
